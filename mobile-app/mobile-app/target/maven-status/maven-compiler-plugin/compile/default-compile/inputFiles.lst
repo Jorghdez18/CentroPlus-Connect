@@ -1,3 +1,7 @@
-/home/dam/Escritorio/centroplus/CentroPlus-Connect/mobile-app/mobile-app/src/main/java/com/centroplus/mobile/Main.java
-/home/dam/Escritorio/centroplus/CentroPlus-Connect/mobile-app/mobile-app/src/main/java/com/centroplus/mobile/controllers/MainController.java
-/home/dam/Escritorio/centroplus/CentroPlus-Connect/mobile-app/mobile-app/src/main/java/com/centroplus/mobile/models/Actividad.java
+/home/dam/Escritorio/CentroPlus-Connect/mobile-app/mobile-app/src/main/java/com/centroplus/mobile/services/ActividadService.java
+/home/dam/Escritorio/CentroPlus-Connect/mobile-app/mobile-app/src/main/java/com/centroplus/mobile/models/Reserva.java
+/home/dam/Escritorio/CentroPlus-Connect/mobile-app/mobile-app/src/main/java/com/centroplus/mobile/models/Incidencia.java
+/home/dam/Escritorio/CentroPlus-Connect/mobile-app/mobile-app/src/main/java/com/centroplus/mobile/models/Actividad.java
+/home/dam/Escritorio/CentroPlus-Connect/mobile-app/mobile-app/src/main/java/com/centroplus/mobile/MainApp.java
+/home/dam/Escritorio/CentroPlus-Connect/mobile-app/mobile-app/src/main/java/com/centroplus/mobile/controllers/MainController.java
+/home/dam/Escritorio/CentroPlus-Connect/mobile-app/mobile-app/src/main/java/com/centroplus/mobile/services/ReservaService.java
