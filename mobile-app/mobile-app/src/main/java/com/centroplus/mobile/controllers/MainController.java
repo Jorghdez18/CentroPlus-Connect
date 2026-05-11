@@ -1,49 +1,120 @@
 package com.centroplus.mobile.controllers;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Label;
 import com.centroplus.mobile.models.Actividad;
-import javafx.collections.FXCollections;
+import com.centroplus.mobile.models.Reserva;
+import com.centroplus.mobile.services.ActividadService;
+import com.centroplus.mobile.services.ReservaService;
+
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+
+import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
 
 public class MainController {
 
     @FXML
-    private Label labelTitulo;
+    private ListView<Actividad> listaActividades;
 
     @FXML
-    private ListView<String> listaActividades;
+    private ListView<Reserva> listaReservas;
+
+    private ActividadService actividadService;
+    private ReservaService reservaService;
 
     private ObservableList<Actividad> actividades;
 
     @FXML
     public void initialize() {
-        actividades = FXCollections.observableArrayList(
-                new Actividad(1, "Yoga", "Deporte", 60, 200, 18, 65),
-                new Actividad(2, "Pilates", "Deporte", 50, 180, 18, 60),
-                new Actividad(3, "Meditación", "Bienestar", 30, 50, 15, 99),
-                new Actividad(4, "Spinning", "Deporte", 45, 400, 18, 50)
+
+        actividadService = new ActividadService();
+        reservaService = new ReservaService();
+
+        actividades = actividadService.obtenerActividades();
+        listaActividades.setItems(actividades);
+
+        listaReservas.setItems(
+                reservaService.obtenerReservas()
         );
-
-        actualizarLista(actividades);
-    }
-
-    private void actualizarLista(ObservableList<Actividad> lista) {
-        listaActividades.getItems().clear();
-        for (Actividad a : lista) {
-            listaActividades.getItems().add(a.getNombre() + " (" + a.getTipo() + ") - " + a.getDuracion() + " min");
-        }
     }
 
     @FXML
-    private void filtrarDeportes() {
-        ObservableList<Actividad> deportes = FXCollections.observableArrayList();
-        for (Actividad a : actividades) {
-            if ("Deporte".equals(a.getTipo())) {
-                deportes.add(a);
-            }
+    private void reservarActividad() {
+
+        Actividad actividad =
+                listaActividades.getSelectionModel().getSelectedItem();
+
+        if (actividad == null) {
+            mostrarAlerta("Selecciona una actividad");
+            return;
         }
-        actualizarLista(deportes);
+
+        Reserva nueva = new Reserva(
+                listaReservas.getItems().size() + 1,
+                "Usuario",
+                actividad.getNombre(),
+                "2026-05-11",
+                "ACTIVA"
+        );
+
+        listaReservas.getItems().add(nueva);
+
+        mostrarAlerta("Reserva realizada correctamente");
+    }
+
+    @FXML
+    private void cancelarReserva() {
+
+        Reserva reserva =
+                listaReservas.getSelectionModel().getSelectedItem();
+
+        if (reserva == null) {
+            mostrarAlerta("Selecciona una reserva");
+            return;
+        }
+
+        listaReservas.getItems().remove(reserva);
+
+        mostrarAlerta("Reserva cancelada");
+    }
+
+    @FXML
+    private void mostrarFormularioIncidencia() {
+
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("Incidencia");
+
+        TextField asunto = new TextField();
+        TextArea descripcion = new TextArea();
+
+        VBox box = new VBox(
+                10,
+                new Label("Asunto"),
+                asunto,
+                new Label("Descripción"),
+                descripcion
+        );
+
+        box.setPadding(new Insets(20));
+
+        dialog.getDialogPane().setContent(box);
+
+        dialog.getDialogPane().getButtonTypes().addAll(
+                ButtonType.OK,
+                ButtonType.CANCEL
+        );
+
+        dialog.showAndWait();
+
+        mostrarAlerta("Incidencia enviada correctamente");
+    }
+
+    private void mostrarAlerta(String msg) {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
     }
 }

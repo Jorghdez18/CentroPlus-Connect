@@ -1,45 +1,70 @@
 package com.centroplus.mobile.models;
 
 public class Actividad {
+
     private int id;
     private String nombre;
-    private String tipo;
+    private String tipoActividad;
     private int duracion;
-    private int calorias;
-    private int edadMin;
-    private int edadMax;
+    private double precio;
+    private int plazasMaximas;
+    private int plazasOcupadas;
 
-    public Actividad(int id, String nombre, String tipo, int duracion, int calorias, int edadMin, int edadMax) {
+    public Actividad(int id,
+            String nombre,
+            String tipoActividad,
+            int duracion,
+            double precio,
+            int plazasMaximas,
+            int plazasOcupadas) {
+
         this.id = id;
         this.nombre = nombre;
-        this.tipo = tipo;
+        this.tipoActividad = tipoActividad;
         this.duracion = duracion;
-        this.calorias = calorias;
-        this.edadMin = edadMin;
-        this.edadMax = edadMax;
+        this.precio = precio;
+        this.plazasMaximas = plazasMaximas;
+        this.plazasOcupadas = plazasOcupadas;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getTipoActividad() {
+        return tipoActividad;
     }
 
     public int getDuracion() {
         return duracion;
     }
 
-    public int getCalorias() {
-        return calorias;
+    public double getPrecio() {
+        return precio;
     }
 
-    public int getEdadMin() {
-        return edadMin;
+    public int getPlazasMaximas() {
+        return plazasMaximas;
     }
 
-    public int getEdadMax() {
-        return edadMax;
+    public int getPlazasOcupadas() {
+        return plazasOcupadas;
+    }
+
+    @Override
+    public String toString() {
+
+        return nombre +
+                " | " +
+                tipoActividad +
+                " | " +
+                plazasOcupadas +
+                "/" +
+                plazasMaximas +
+                " plazas";
     }
 }
