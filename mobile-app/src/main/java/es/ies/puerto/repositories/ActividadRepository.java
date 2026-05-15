@@ -13,24 +13,54 @@ public class ActividadRepository {
     }
 
     public Actividad findById(int id) {
-        for (Actividad actividad : actividades) {
-            if (actividad.getId() == id) {
-                return actividad;
+
+        for (int i = 0; i < actividades.size(); i++) {
+            if (actividades.get(i).getId() == id) {
+                return actividades.get(i);
             }
         }
         return null;
     }
 
-    public void save(Actividad actividad) {
+    public boolean save(Actividad actividad) {
+
+        if (actividad == null) {
+            return false;
+        }
+
+        if (findById(actividad.getId()) != null) {
+            return false;
+        }
+
         actividades.add(actividad);
+        return true;
     }
 
-    public void delete(int id) {
+    public boolean update(Actividad actividad) {
+
+        if (actividad == null) {
+            return false;
+        }
+
+        for (int i = 0; i < actividades.size(); i++) {
+            if (actividades.get(i).getId() == actividad.getId()) {
+                actividades.set(i, actividad);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean delete(int id) {
+
         for (int i = 0; i < actividades.size(); i++) {
             if (actividades.get(i).getId() == id) {
                 actividades.remove(i);
-                break;
+                return true;
             }
         }
+
+        return false;
     }
 }

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Actividad.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mobile-app</a> &gt; <a href="index.source.html" class="el_package">es.ies.puerto.models</a> &gt; <span class="el_source">Actividad.java</span></div><h1>Actividad.java</h1><pre class="source lang-java linenums">package es.ies.puerto.models;
+
+public class Actividad {
+
+    private int id;
+    private String nombre;
+    private String tipoActividad;
+    private int duracionMinutos;
+    private double precio;
+    private int plazasMaximas;
+    private int plazasOcupadas;
+
+    public Actividad(int id, String nombre, String tipoActividad,
+<span class="fc" id="L14">            int duracionMinutos, double precio, int plazasMaximas) {</span>
+<span class="fc" id="L15">        this.id = id;</span>
+<span class="fc" id="L16">        this.nombre = nombre;</span>
+<span class="fc" id="L17">        this.tipoActividad = tipoActividad;</span>
+<span class="fc" id="L18">        this.duracionMinutos = duracionMinutos;</span>
+<span class="fc" id="L19">        this.precio = precio;</span>
+<span class="fc" id="L20">        this.plazasMaximas = plazasMaximas;</span>
+<span class="fc" id="L21">        this.plazasOcupadas = 0;</span>
+<span class="fc" id="L22">    }</span>
+
+    public int getId() {
+<span class="fc" id="L25">        return id;</span>
+    }
+
+    public String getNombre() {
+<span class="nc" id="L29">        return nombre;</span>
+    }
+
+    public int getPlazasMaximas() {
+<span class="nc" id="L33">        return plazasMaximas;</span>
+    }
+
+    public int getPlazasOcupadas() {
+<span class="fc" id="L37">        return plazasOcupadas;</span>
+    }
+
+    public int getPlazasDisponibles() {
+<span class="fc" id="L41">        return plazasMaximas - plazasOcupadas;</span>
+    }
+
+    public void setId(int id) {
+<span class="nc" id="L45">        this.id = id;</span>
+<span class="nc" id="L46">    }</span>
+
+    public void setNombre(String nombre) {
+<span class="nc" id="L49">        this.nombre = nombre;</span>
+<span class="nc" id="L50">    }</span>
+
+    public void setTipoActividad(String tipoActividad) {
+<span class="nc" id="L53">        this.tipoActividad = tipoActividad;</span>
+<span class="nc" id="L54">    }</span>
+
+    public void setDuracionMinutos(int duracionMinutos) {
+<span class="nc" id="L57">        this.duracionMinutos = duracionMinutos;</span>
+<span class="nc" id="L58">    }</span>
+
+    public void setPrecio(double precio) {
+<span class="nc" id="L61">        this.precio = precio;</span>
+<span class="nc" id="L62">    }</span>
+
+    public void setPlazasMaximas(int plazasMaximas) {
+<span class="nc" id="L65">        this.plazasMaximas = plazasMaximas;</span>
+<span class="nc" id="L66">    }</span>
+
+    public void setPlazasOcupadas(int plazasOcupadas) {
+<span class="nc" id="L69">        this.plazasOcupadas = plazasOcupadas;</span>
+<span class="nc" id="L70">    }</span>
+
+    public boolean tienePlazas() {
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        return plazasOcupadas &lt; plazasMaximas;</span>
+    }
+
+    public void reservarPlaza() {
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        if (tienePlazas()) {</span>
+<span class="fc" id="L78">            plazasOcupadas++;</span>
+        }
+<span class="fc" id="L80">    }</span>
+
+    public void cancelarPlaza() {
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (plazasOcupadas &gt; 0) {</span>
+<span class="fc" id="L84">            plazasOcupadas--;</span>
+        }
+<span class="fc" id="L86">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L90">        return &quot;Actividad [id=&quot; + id + &quot;, nombre=&quot; + nombre + &quot;, tipoActividad=&quot; + tipoActividad + &quot;, duracionMinutos=&quot;</span>
+                + duracionMinutos + &quot;, precio=&quot; + precio + &quot;, plazasMaximas=&quot; + plazasMaximas + &quot;, plazasOcupadas=&quot;
+                + plazasOcupadas + &quot;]&quot;;
+    }
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

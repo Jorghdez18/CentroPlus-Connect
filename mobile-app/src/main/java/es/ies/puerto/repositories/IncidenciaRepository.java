@@ -6,22 +6,61 @@ import java.util.List;
 
 public class IncidenciaRepository {
 
-    private List<Incidencia> incidencias = new ArrayList<>();
+    private List<Incidencia> lista = new ArrayList<>();
 
     public List<Incidencia> findAll() {
-        return incidencias;
+        return lista;
     }
 
-    public void save(Incidencia i) {
-        incidencias.add(i);
-    }
+    public Incidencia findById(int id) {
 
-    public void delete(int id) {
-        for (int i = 0; i < incidencias.size(); i++) {
-            if (incidencias.get(i).getId() == id) {
-                incidencias.remove(i);
-                break;
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getId() == id) {
+                return lista.get(i);
             }
         }
+        return null;
+    }
+
+    public boolean save(Incidencia incidencia) {
+
+        if (incidencia == null) {
+            return false;
+        }
+
+        if (findById(incidencia.getId()) != null) {
+            return false;
+        }
+
+        lista.add(incidencia);
+        return true;
+    }
+
+    public boolean update(Incidencia incidencia) {
+
+        if (incidencia == null) {
+            return false;
+        }
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getId() == incidencia.getId()) {
+                lista.set(i, incidencia);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean delete(int id) {
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).getId() == id) {
+                lista.remove(i);
+                return true;
+            }
+        }
+
+        return false;
     }
 }

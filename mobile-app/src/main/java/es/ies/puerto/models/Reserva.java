@@ -42,6 +42,22 @@ public class Reserva {
         this.estado = estado;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public void setIdActividad(int idActividad) {
+        this.idActividad = idActividad;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
     @Override
     public String toString() {
         return "Reserva " + id + " - Usuario " + idUsuario + " - Act " + idActividad;

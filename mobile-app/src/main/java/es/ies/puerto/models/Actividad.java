@@ -11,7 +11,7 @@ public class Actividad {
     private int plazasOcupadas;
 
     public Actividad(int id, String nombre, String tipoActividad,
-                     int duracionMinutos, double precio, int plazasMaximas) {
+            int duracionMinutos, double precio, int plazasMaximas) {
         this.id = id;
         this.nombre = nombre;
         this.tipoActividad = tipoActividad;
@@ -36,9 +36,37 @@ public class Actividad {
     public int getPlazasOcupadas() {
         return plazasOcupadas;
     }
-    
+
     public int getPlazasDisponibles() {
         return plazasMaximas - plazasOcupadas;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setTipoActividad(String tipoActividad) {
+        this.tipoActividad = tipoActividad;
+    }
+
+    public void setDuracionMinutos(int duracionMinutos) {
+        this.duracionMinutos = duracionMinutos;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public void setPlazasMaximas(int plazasMaximas) {
+        this.plazasMaximas = plazasMaximas;
+    }
+
+    public void setPlazasOcupadas(int plazasOcupadas) {
+        this.plazasOcupadas = plazasOcupadas;
     }
 
     public boolean tienePlazas() {
@@ -56,4 +84,13 @@ public class Actividad {
             plazasOcupadas--;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Actividad [id=" + id + ", nombre=" + nombre + ", tipoActividad=" + tipoActividad + ", duracionMinutos="
+                + duracionMinutos + ", precio=" + precio + ", plazasMaximas=" + plazasMaximas + ", plazasOcupadas="
+                + plazasOcupadas + "]";
+    }
+
+    
 }

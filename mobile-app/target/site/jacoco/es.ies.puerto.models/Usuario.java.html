@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Usuario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mobile-app</a> &gt; <a href="index.source.html" class="el_package">es.ies.puerto.models</a> &gt; <span class="el_source">Usuario.java</span></div><h1>Usuario.java</h1><pre class="source lang-java linenums">package es.ies.puerto.models;
+
+import java.util.Objects;
+
+public class Usuario extends Persona {
+
+    private Integer id;
+    private String tipoUsuario;
+
+
+    public Usuario(Integer id, String tipoUsuario, String dni, String nombre, String telefono, String email) {
+<span class="fc" id="L12">        super(dni, nombre, telefono, email);</span>
+<span class="fc" id="L13">        this.id = id;</span>
+<span class="fc" id="L14">        this.tipoUsuario = tipoUsuario;</span>
+<span class="fc" id="L15">    }</span>
+
+
+    public int getId() {
+<span class="fc" id="L19">        return id;</span>
+    }
+
+    public void setId(int id) {
+<span class="nc" id="L23">        this.id = id;</span>
+<span class="nc" id="L24">    }</span>
+
+    public String getTipoUsuario() {
+<span class="fc" id="L27">        return tipoUsuario;</span>
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+<span class="fc" id="L31">        this.tipoUsuario = tipoUsuario;</span>
+<span class="fc" id="L32">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L36">        return Objects.hash(id);</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (this == obj)</span>
+<span class="nc" id="L42">            return true;</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if (obj == null)</span>
+<span class="nc" id="L44">            return false;</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        if (!super.equals(obj))</span>
+<span class="nc" id="L46">            return false;</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="nc" id="L48">            return false;</span>
+<span class="fc" id="L49">        Usuario other = (Usuario) obj;</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">        return id == other.id;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L55">        return &quot;Usuario [id=&quot; + id + &quot;, tipoUsuario=&quot; + tipoUsuario + &quot;]&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

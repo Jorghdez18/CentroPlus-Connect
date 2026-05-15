@@ -17,25 +17,36 @@ public class ActividadService {
         return repository.findById(id);
     }
 
-    public void save(Actividad actividad) {
-        repository.save(actividad);
+    public boolean save(Actividad actividad) {
+
+        if (actividad == null) {
+            return false;
+        }
+
+        return repository.save(actividad);
     }
 
     public boolean reservarPlaza(int id) {
+
         Actividad actividad = repository.findById(id);
+
         if (actividad != null && actividad.tienePlazas()) {
             actividad.reservarPlaza();
             return true;
         }
+
         return false;
     }
 
     public boolean cancelarPlaza(int id) {
+
         Actividad actividad = repository.findById(id);
+
         if (actividad != null) {
             actividad.cancelarPlaza();
             return true;
         }
+
         return false;
     }
 }

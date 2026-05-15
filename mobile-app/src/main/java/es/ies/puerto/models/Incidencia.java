@@ -44,6 +44,15 @@ public class Incidencia {
         return estado;
     }
 
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+
     public void cerrar() {
         this.estado = "CERRADA";
     }

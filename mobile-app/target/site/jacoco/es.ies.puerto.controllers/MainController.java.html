@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mobile-app</a> &gt; <a href="index.source.html" class="el_package">es.ies.puerto.controllers</a> &gt; <span class="el_source">MainController.java</span></div><h1>MainController.java</h1><pre class="source lang-java linenums">package es.ies.puerto.controllers;
+
+import es.ies.puerto.models.Actividad;
+import es.ies.puerto.models.Incidencia;
+import es.ies.puerto.models.Reserva;
+import es.ies.puerto.services.ActividadService;
+import es.ies.puerto.services.IncidenciaService;
+import es.ies.puerto.services.ReservaService;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import javafx.scene.control.ListView;
+
+public class MainController {
+
+    private BorderPane root;
+
+<span class="nc" id="L21">    private ActividadService actividadService = new ActividadService();</span>
+<span class="nc" id="L22">    private ReservaService reservaService = new ReservaService();</span>
+<span class="nc" id="L23">    private IncidenciaService incidenciaService = new IncidenciaService();</span>
+
+    private ListView&lt;String&gt; listAct;
+    private ListView&lt;String&gt; listRes;
+    private ListView&lt;String&gt; listInc;
+
+<span class="nc" id="L29">    public MainController() {</span>
+
+<span class="nc" id="L31">        root = new BorderPane();</span>
+<span class="nc" id="L32">        root.setTop(menu());</span>
+
+<span class="nc" id="L34">        cargarDatosIniciales();</span>
+<span class="nc" id="L35">        mostrarInicio();</span>
+<span class="nc" id="L36">    }</span>
+
+    public BorderPane getView() {
+<span class="nc" id="L39">        return root;</span>
+    }
+
+    private VBox menu() {
+
+<span class="nc" id="L44">        VBox v = new VBox(10);</span>
+<span class="nc" id="L45">        v.setStyle(&quot;-fx-padding:10; -fx-background-color:#1e1e2f;&quot;);</span>
+
+<span class="nc" id="L47">        Button b1 = btn(&quot;Inicio&quot;);</span>
+<span class="nc" id="L48">        Button b2 = btn(&quot;Actividades&quot;);</span>
+<span class="nc" id="L49">        Button b3 = btn(&quot;Reservas&quot;);</span>
+<span class="nc" id="L50">        Button b4 = btn(&quot;Incidencias&quot;);</span>
+
+<span class="nc" id="L52">        b1.setOnAction(e -&gt; mostrarInicio());</span>
+<span class="nc" id="L53">        b2.setOnAction(e -&gt; mostrarActividades());</span>
+<span class="nc" id="L54">        b3.setOnAction(e -&gt; mostrarReservas());</span>
+<span class="nc" id="L55">        b4.setOnAction(e -&gt; mostrarIncidencias());</span>
+
+<span class="nc" id="L57">        v.getChildren().addAll(b1, b2, b3, b4);</span>
+
+<span class="nc" id="L59">        return v;</span>
+    }
+
+    private Button btn(String t) {
+<span class="nc" id="L63">        Button b = new Button(t);</span>
+<span class="nc" id="L64">        b.setMaxWidth(Double.MAX_VALUE);</span>
+<span class="nc" id="L65">        b.setStyle(&quot;-fx-background-color:#2d89ef; -fx-text-fill:white; -fx-padding:10;&quot;);</span>
+<span class="nc" id="L66">        return b;</span>
+    }
+
+   private void mostrarInicio() {
+
+<span class="nc" id="L71">    VBox v = new VBox(15);</span>
+<span class="nc" id="L72">    v.setStyle(&quot;-fx-padding:20; -fx-background-color:#f2f4f8;&quot;);</span>
+
+
+<span class="nc" id="L75">    Label titulo = new Label(&quot;CENTRO PLUS CONNECT&quot;);</span>
+<span class="nc" id="L76">    titulo.setStyle(</span>
+            &quot;-fx-font-size:22px;&quot; +
+            &quot;-fx-font-weight:bold;&quot; +
+            &quot;-fx-text-fill:#1e1e2f;&quot;
+    );
+
+<span class="nc" id="L82">    Label subtitulo = new Label(&quot;Gestión de actividades deportivas y académicas&quot;);</span>
+<span class="nc" id="L83">    subtitulo.setStyle(&quot;-fx-font-size:14px; -fx-text-fill:#555;&quot;);</span>
+
+<span class="nc" id="L85">    VBox card = new VBox(10);</span>
+<span class="nc" id="L86">    card.setStyle(</span>
+            &quot;-fx-background-color:white;&quot; +
+            &quot;-fx-padding:15;&quot; +
+            &quot;-fx-background-radius:12;&quot; +
+            &quot;-fx-border-color:#ddd;&quot; +
+            &quot;-fx-border-radius:12;&quot;
+    );
+
+<span class="nc" id="L94">    Label info = new Label(&quot;Resumen del sistema&quot;);</span>
+<span class="nc" id="L95">    info.setStyle(&quot;-fx-font-size:16px; -fx-font-weight:bold;&quot;);</span>
+
+<span class="nc" id="L97">    Label act = new Label(&quot;Actividades: &quot; + actividadService.findAll().size());</span>
+<span class="nc" id="L98">    Label res = new Label(&quot;Reservas: &quot; + reservaService.findAll().size());</span>
+<span class="nc" id="L99">    Label inc = new Label(&quot;Incidencias: &quot; + incidenciaService.findAll().size());</span>
+
+<span class="nc" id="L101">    card.getChildren().addAll(info, act, res, inc);</span>
+
+<span class="nc" id="L103">    Label footer = new Label(&quot;Selecciona una opción en el menú&quot;);</span>
+<span class="nc" id="L104">    footer.setStyle(&quot;-fx-text-fill:#777;&quot;);</span>
+
+<span class="nc" id="L106">    v.getChildren().addAll(titulo, subtitulo, card, footer);</span>
+
+<span class="nc" id="L108">    root.setCenter(v);</span>
+<span class="nc" id="L109">}</span>
+
+    private void mostrarActividades() {
+
+<span class="nc" id="L113">        VBox v = new VBox(10);</span>
+<span class="nc" id="L114">        v.setStyle(&quot;-fx-padding:15;&quot;);</span>
+
+<span class="nc" id="L116">        listAct = new ListView&lt;&gt;();</span>
+
+<span class="nc" id="L118">        List&lt;Actividad&gt; lista = actividadService.findAll();</span>
+
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (lista.isEmpty()) {</span>
+<span class="nc" id="L121">            listAct.getItems().add(&quot;No hay actividades cargadas&quot;);</span>
+        }
+
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        for (int i = 0; i &lt; lista.size(); i++) {</span>
+
+<span class="nc" id="L126">            Actividad a = lista.get(i);</span>
+
+<span class="nc" id="L128">            listAct.getItems().add(</span>
+<span class="nc" id="L129">                    a.getId() + &quot; - &quot; +</span>
+<span class="nc" id="L130">                    a.getNombre() +</span>
+                    &quot; | plazas: &quot; +
+<span class="nc" id="L132">                    a.getPlazasDisponibles()</span>
+            );
+        }
+
+<span class="nc" id="L136">        Button reservar = btn(&quot;Reservar&quot;);</span>
+
+<span class="nc" id="L138">        reservar.setOnAction(e -&gt; reservarActividad());</span>
+
+<span class="nc" id="L140">        v.getChildren().addAll(listAct, reservar);</span>
+
+<span class="nc" id="L142">        root.setCenter(v);</span>
+<span class="nc" id="L143">    }</span>
+
+    private void reservarActividad() {
+
+<span class="nc" id="L147">        String sel = listAct.getSelectionModel().getSelectedItem();</span>
+
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        if (sel == null) {</span>
+<span class="nc" id="L150">            alerta(&quot;Selecciona actividad&quot;, Alert.AlertType.WARNING);</span>
+<span class="nc" id="L151">            return;</span>
+        }
+
+<span class="nc" id="L154">        int id = Integer.parseInt(sel.split(&quot; - &quot;)[0]);</span>
+
+<span class="nc" id="L156">        boolean ok = actividadService.reservarPlaza(id);</span>
+
+<span class="nc bnc" id="L158" title="All 2 branches missed.">        if (ok) {</span>
+
+<span class="nc" id="L160">            reservaService.crearReserva(</span>
+<span class="nc" id="L161">                    reservaService.findAll().size() + 1,</span>
+                    1,
+                    id
+            );
+
+<span class="nc" id="L166">            alerta(&quot;Reserva creada&quot;, Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L167">            mostrarActividades();</span>
+        } else {
+<span class="nc" id="L169">            alerta(&quot;Sin plazas&quot;, Alert.AlertType.ERROR);</span>
+        }
+<span class="nc" id="L171">    }</span>
+
+    private void mostrarReservas() {
+
+<span class="nc" id="L175">        VBox v = new VBox(10);</span>
+<span class="nc" id="L176">        v.setStyle(&quot;-fx-padding:15;&quot;);</span>
+
+<span class="nc" id="L178">        listRes = new ListView&lt;&gt;();</span>
+
+<span class="nc" id="L180">        List&lt;Reserva&gt; lista = reservaService.findAll();</span>
+
+<span class="nc bnc" id="L182" title="All 2 branches missed.">        if (lista.isEmpty()) {</span>
+<span class="nc" id="L183">            listRes.getItems().add(&quot;No hay reservas&quot;);</span>
+        }
+
+<span class="nc bnc" id="L186" title="All 2 branches missed.">        for (int i = 0; i &lt; lista.size(); i++) {</span>
+
+<span class="nc" id="L188">            Reserva r = lista.get(i);</span>
+
+<span class="nc" id="L190">            listRes.getItems().add(</span>
+<span class="nc" id="L191">                    r.getId() +</span>
+<span class="nc" id="L192">                    &quot; | Usuario: &quot; + r.getIdUsuario() +</span>
+<span class="nc" id="L193">                    &quot; | Act: &quot; + r.getIdActividad()</span>
+            );
+        }
+
+<span class="nc" id="L197">        Button cancelar = btn(&quot;Cancelar&quot;);</span>
+
+<span class="nc" id="L199">        cancelar.setOnAction(e -&gt; cancelarReserva());</span>
+
+<span class="nc" id="L201">        v.getChildren().addAll(listRes, cancelar);</span>
+
+<span class="nc" id="L203">        root.setCenter(v);</span>
+<span class="nc" id="L204">    }</span>
+
+    private void cancelarReserva() {
+
+<span class="nc" id="L208">        String sel = listRes.getSelectionModel().getSelectedItem();</span>
+
+<span class="nc bnc" id="L210" title="All 2 branches missed.">        if (sel == null) {</span>
+<span class="nc" id="L211">            alerta(&quot;Selecciona reserva&quot;, Alert.AlertType.WARNING);</span>
+<span class="nc" id="L212">            return;</span>
+        }
+
+<span class="nc" id="L215">        int id = Integer.parseInt(sel.split(&quot; &quot;)[0]);</span>
+
+<span class="nc" id="L217">        reservaService.cancelarReserva(id);</span>
+
+<span class="nc" id="L219">        alerta(&quot;Cancelada&quot;, Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L220">        mostrarReservas();</span>
+<span class="nc" id="L221">    }</span>
+
+    private void mostrarIncidencias() {
+
+<span class="nc" id="L225">        VBox v = new VBox(10);</span>
+<span class="nc" id="L226">        v.setStyle(&quot;-fx-padding:15;&quot;);</span>
+
+<span class="nc" id="L228">        TextField asunto = new TextField();</span>
+<span class="nc" id="L229">        TextArea desc = new TextArea();</span>
+
+<span class="nc" id="L231">        Button enviar = btn(&quot;Enviar&quot;);</span>
+
+<span class="nc" id="L233">        listInc = new ListView&lt;&gt;();</span>
+
+<span class="nc" id="L235">        cargarIncidencias();</span>
+
+<span class="nc" id="L237">        enviar.setOnAction(e -&gt; {</span>
+
+<span class="nc" id="L239">            incidenciaService.crearIncidencia(</span>
+<span class="nc" id="L240">                    incidenciaService.findAll().size() + 1,</span>
+                    1,
+<span class="nc" id="L242">                    asunto.getText(),</span>
+<span class="nc" id="L243">                    desc.getText()</span>
+            );
+
+<span class="nc" id="L246">            asunto.clear();</span>
+<span class="nc" id="L247">            desc.clear();</span>
+
+<span class="nc" id="L249">            cargarIncidencias();</span>
+<span class="nc" id="L250">        });</span>
+
+<span class="nc" id="L252">        v.getChildren().addAll(asunto, desc, enviar, listInc);</span>
+
+<span class="nc" id="L254">        root.setCenter(v);</span>
+<span class="nc" id="L255">    }</span>
+
+    private void cargarIncidencias() {
+
+<span class="nc" id="L259">        listInc.getItems().clear();</span>
+
+<span class="nc" id="L261">        List&lt;Incidencia&gt; lista = incidenciaService.findAll();</span>
+
+<span class="nc bnc" id="L263" title="All 2 branches missed.">        if (lista.isEmpty()) {</span>
+<span class="nc" id="L264">            listInc.getItems().add(&quot;No hay incidencias&quot;);</span>
+        }
+
+<span class="nc bnc" id="L267" title="All 2 branches missed.">        for (int i = 0; i &lt; lista.size(); i++) {</span>
+
+<span class="nc" id="L269">            Incidencia in = lista.get(i);</span>
+
+<span class="nc" id="L271">            listInc.getItems().add(</span>
+<span class="nc" id="L272">                    in.getId() + &quot; - &quot; + in.getAsunto()</span>
+            );
+        }
+<span class="nc" id="L275">    }</span>
+
+    private void cargarDatosIniciales() {
+
+<span class="nc" id="L279">        actividadService.save(new Actividad(1, &quot;Fútbol&quot;, &quot;Deporte&quot;, 60, 5.0, 10));</span>
+<span class="nc" id="L280">        actividadService.save(new Actividad(2, &quot;Baloncesto&quot;, &quot;Deporte&quot;, 60, 6.0, 8));</span>
+<span class="nc" id="L281">        actividadService.save(new Actividad(3, &quot;Programación&quot;, &quot;Academica&quot;, 90, 10.0, 5));</span>
+
+<span class="nc" id="L283">        reservaService.crearReserva(1, 1, 1);</span>
+<span class="nc" id="L284">    }</span>
+
+    private void alerta(String m, Alert.AlertType t) {
+<span class="nc" id="L287">        Alert a = new Alert(t);</span>
+<span class="nc" id="L288">        a.setContentText(m);</span>
+<span class="nc" id="L289">        a.showAndWait();</span>
+<span class="nc" id="L290">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -12,16 +12,55 @@ public class ReservaRepository {
         return reservas;
     }
 
-    public void save(Reserva r) {
-        reservas.add(r);
+    public Reserva findById(int id) {
+
+        for (int i = 0; i < reservas.size(); i++) {
+            if (reservas.get(i).getId() == id) {
+                return reservas.get(i);
+            }
+        }
+        return null;
     }
 
-    public void delete(int id) {
+    public boolean save(Reserva r) {
+
+        if (r == null) {
+            return false;
+        }
+
+        if (findById(r.getId()) != null) {
+            return false;
+        }
+
+        reservas.add(r);
+        return true;
+    }
+
+    public boolean update(Reserva r) {
+
+        if (r == null) {
+            return false;
+        }
+
+        for (int i = 0; i < reservas.size(); i++) {
+            if (reservas.get(i).getId() == r.getId()) {
+                reservas.set(i, r);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean delete(int id) {
+
         for (int i = 0; i < reservas.size(); i++) {
             if (reservas.get(i).getId() == id) {
                 reservas.remove(i);
-                break;
+                return true;
             }
         }
+
+        return false;
     }
 }

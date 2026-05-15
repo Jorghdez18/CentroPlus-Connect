@@ -13,24 +13,39 @@ public class UsuarioRepository {
     }
 
     public Usuario findById(int id) {
-        for (Usuario u : usuarios) {
-            if (u.getId() == id) {
-                return u;
+
+        for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i).getId() == id) {
+                return usuarios.get(i);
             }
         }
+
         return null;
     }
 
-    public void save(Usuario u) {
+    public boolean save(Usuario u) {
+
+        if (u == null) {
+            return false;
+        }
+
+        if (findById(u.getId()) != null) {
+            return false;
+        }
+
         usuarios.add(u);
+        return true;
     }
 
-    public void delete(int id) {
+    public boolean delete(int id) {
+
         for (int i = 0; i < usuarios.size(); i++) {
             if (usuarios.get(i).getId() == id) {
                 usuarios.remove(i);
-                break;
+                return true;
             }
         }
+
+        return false;
     }
 }

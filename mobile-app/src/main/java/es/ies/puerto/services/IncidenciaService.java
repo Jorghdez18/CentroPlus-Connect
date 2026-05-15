@@ -15,13 +15,15 @@ public class IncidenciaService {
 
     public boolean crearIncidencia(int id, int idUsuario, String asunto, String descripcion) {
 
-        if (asunto == null || asunto.isEmpty())
+        if (asunto == null || asunto.isEmpty()) {
             return false;
-        if (descripcion == null || descripcion.isEmpty())
+        }
+
+        if (descripcion == null || descripcion.isEmpty()) {
             return false;
+        }
 
         Incidencia incidencia = new Incidencia(id, idUsuario, asunto, descripcion);
-        repository.save(incidencia);
-        return true;
+        return repository.save(incidencia);
     }
 }

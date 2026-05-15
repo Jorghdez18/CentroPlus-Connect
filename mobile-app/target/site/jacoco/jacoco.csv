@@ -1,0 +1,16 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+mobile-app,es.ies.puerto,PrincipalApplication,39,0,0,0,13,0,3,0,3,0
+mobile-app,es.ies.puerto.controllers,MainController,678,0,18,0,138,0,29,0,20,0
+mobile-app,es.ies.puerto.repositories,UsuarioRepository,80,0,12,0,18,0,11,0,5,0
+mobile-app,es.ies.puerto.repositories,ActividadRepository,13,99,5,13,3,22,6,9,1,5
+mobile-app,es.ies.puerto.repositories,ReservaRepository,52,60,11,7,10,15,8,7,1,5
+mobile-app,es.ies.puerto.repositories,IncidenciaRepository,17,95,7,11,5,20,8,7,1,5
+mobile-app,es.ies.puerto.models,Persona,62,62,7,7,14,15,15,4,8,4
+mobile-app,es.ies.puerto.models,Incidencia,10,47,0,0,4,17,3,8,3,8
+mobile-app,es.ies.puerto.models,Usuario,20,58,5,5,7,15,7,6,2,6
+mobile-app,es.ies.puerto.models,Reserva,19,42,0,0,9,14,5,7,5,7
+mobile-app,es.ies.puerto.models,Actividad,35,80,3,3,16,20,12,8,9,8
+mobile-app,es.ies.puerto.services,ActividadService,11,44,2,6,3,14,4,6,2,4
+mobile-app,es.ies.puerto.services,UsuarioService,3,0,0,0,1,0,1,0,1,0
+mobile-app,es.ies.puerto.services,ReservaService,5,51,2,4,2,11,3,4,1,3
+mobile-app,es.ies.puerto.services,IncidenciaService,4,35,2,6,1,8,3,4,1,2

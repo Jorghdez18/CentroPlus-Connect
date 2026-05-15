@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Persona.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mobile-app</a> &gt; <a href="index.source.html" class="el_package">es.ies.puerto.models</a> &gt; <span class="el_source">Persona.java</span></div><h1>Persona.java</h1><pre class="source lang-java linenums">package es.ies.puerto.models;
+
+import java.util.Objects;
+
+public abstract class Persona {
+
+    private String dni;
+    private String nombre;
+    private String telefono;
+    private String email;
+
+<span class="fc" id="L12">    public Persona(String dni, String nombre, String telefono, String email) {</span>
+<span class="fc" id="L13">        this.dni = dni;</span>
+<span class="fc" id="L14">        this.nombre = nombre;</span>
+<span class="fc" id="L15">        this.telefono = telefono;</span>
+<span class="fc" id="L16">        this.email = email;</span>
+<span class="fc" id="L17">    }</span>
+
+    public String getDni() {
+<span class="nc" id="L20">        return dni;</span>
+    }
+
+    public String getNombre() {
+<span class="fc" id="L24">        return nombre;</span>
+    }
+
+    public String getTelefono() {
+<span class="nc" id="L28">        return telefono;</span>
+    }
+
+    public String getEmail() {
+<span class="nc" id="L32">        return email;</span>
+    }
+
+    public void setDni(String dni) {
+<span class="nc" id="L36">        this.dni = dni;</span>
+<span class="nc" id="L37">    }</span>
+
+    public void setNombre(String nombre) {
+<span class="fc" id="L40">        this.nombre = nombre;</span>
+<span class="fc" id="L41">    }</span>
+
+    public void setTelefono(String telefono) {
+<span class="nc" id="L44">        this.telefono = telefono;</span>
+<span class="nc" id="L45">    }</span>
+
+    public void setEmail(String email) {
+<span class="nc" id="L48">        this.email = email;</span>
+<span class="nc" id="L49">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L53">        return Objects.hash(dni, nombre, telefono, email);</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (this == obj)</span>
+<span class="nc" id="L59">            return true;</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (obj == null)</span>
+<span class="nc" id="L61">            return false;</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (getClass() != obj.getClass())</span>
+<span class="nc" id="L63">            return false;</span>
+<span class="fc" id="L64">        Persona other = (Persona) obj;</span>
+<span class="pc bpc" id="L65" title="2 of 4 branches missed.">        return Objects.equals(dni, other.dni) &amp;&amp; Objects.equals(nombre, other.nombre)</span>
+<span class="pc bpc" id="L66" title="2 of 4 branches missed.">                &amp;&amp; Objects.equals(telefono, other.telefono) &amp;&amp; Objects.equals(email, other.email);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L71">        return &quot;Persona [dni=&quot; + dni + &quot;, nombre=&quot; + nombre + &quot;, telefono=&quot; + telefono + &quot;, email=&quot; + email + &quot;]&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -20,19 +20,22 @@ public class ReservaService {
 
         for (Reserva r : lista) {
             if (r.getIdUsuario() == idUsuario &&
-                r.getIdActividad() == idActividad) {
-                return false; // duplicada
+                    r.getIdActividad() == idActividad) {
+                return false;
             }
         }
 
-        Reserva nueva = new Reserva(id, idUsuario, idActividad,
-                LocalDate.now(), "ACTIVA");
+        Reserva nueva = new Reserva(
+                id,
+                idUsuario,
+                idActividad,
+                LocalDate.now(),
+                "ACTIVA");
 
-        repo.save(nueva);
-        return true;
+        return repo.save(nueva);
     }
 
-    public void cancelarReserva(int id) {
-        repo.delete(id);
+    public boolean cancelarReserva(int id) {
+        return repo.delete(id);
     }
 }
